@@ -23,6 +23,7 @@ namespace HelloWorld
         [Rpc(SendTo.Server)]
         void SubmitPositionRequestRpc(RpcParams rpcParams = default)
         {
+            Debug.Log($"Server Received the movement request on NetworkObject #{NetworkObjectId}");
             var randomPosition = GetRandomPositionOnPlane();
             transform.position = randomPosition;
             Position.Value = randomPosition;
@@ -30,7 +31,7 @@ namespace HelloWorld
 
         static Vector3 GetRandomPositionOnPlane()
         {
-            return new Vector3(Random.Range(-3f, 3f), 1f, Random.Range(-3f, 3f));
+            return new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0f);
         }
 
         void Update()
