@@ -1,9 +1,10 @@
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace HelloWorld
 {
-    public class HelloWorldManager : MonoBehaviour
+    public class NetworkManagerGUI : MonoBehaviour
     {
         static private NetworkManager m_NetworkManager;
 
@@ -34,6 +35,12 @@ namespace HelloWorld
             if (GUILayout.Button("Host")) m_NetworkManager.StartHost();
             if (GUILayout.Button("Client")) m_NetworkManager.StartClient();
             if (GUILayout.Button("Server")) m_NetworkManager.StartServer();
+            if (GUILayout.Button("Quit")) QuitApp();
+        }
+
+        static void QuitApp()
+        {
+            Application.Quit();
         }
 
         static void StatusLabels()
