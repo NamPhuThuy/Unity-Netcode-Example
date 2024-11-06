@@ -1,10 +1,9 @@
+using System;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace HelloWorld
-{
-    public class NetworkManagerGUI : MonoBehaviour
+public class NetworkManagerGUI : MonoBehaviour
     {
         static private NetworkManager m_NetworkManager;
 
@@ -53,22 +52,64 @@ namespace HelloWorld
             GUILayout.Label("Mode: " + mode);
         }
 
+        private void Update()
+        {
+            if (m_NetworkManager.IsServer)
+            {
+                foreach (ulong uid in m_NetworkManager.ConnectedClientsIds)
+                    m_NetworkManager.SpawnManager.GetPlayerNetworkObject(uid).GetComponent<PlayerMovementController>().MovementHandle();
+            }
+            else
+            {
+                Debug.Log("check for clients");
+                var playerObject = m_NetworkManager.SpawnManager.GetLocalPlayerObject();
+                var player = playerObject.GetComponent<PlayerMovementController>();
+                player.MovementHandle();
+            }
+        }
+
         static void SubmitNewPosition()
         {
+            /*if (m_NetworkManager.IsServer)
+                if (GUILayout.Button("Move"))
+            {
+                //Check if this instance is a host (a client and a server) or not
+                if (m_NetworkManager.IsClient) return;
+                
+                foreach (ulong uid in m_NetworkManager.ConnectedClientsIds)
+                    m_NetworkManager.SpawnManager.GetPlayerNetworkObject(uid).GetComponent<PlayerMovementController>().Move();
+            }
+            else if (m_NetworkManager.IsClient)
+            {
+                if (GUILayout.Button("Request Position Change"))
+                {
+                    var playerObject = m_NetworkManager.SpawnManager.GetLocalPlayerObject();
+                    var player = playerObject.GetComponent<PlayerMovementController>();
+                    player.Move();
+                }
+            }*/
+            
+            
             if (GUILayout.Button(m_NetworkManager.IsServer ? "Move" : "Request Position Change"))
             {
+                //This condition checks if the instance is a dedicated server (i.e., it’s only the server, without any client functions). Ensures this is a server-only instance and not a host
                 if (m_NetworkManager.IsServer && !m_NetworkManager.IsClient )
                 {
+                    /*
+                     - m_NetworkManager.ConnectedClientsIds: return a list of unique client IDs (ulong type) for all connected clients.
+                     
+                     - m_NetworkManager.SpawnManager.GetPlayerNetworkObject(uid): retrieves the NetworkObject for a specific player using their uid. The NetworkObject represents the networked player object associated with each client.
+                     */
                     foreach (ulong uid in m_NetworkManager.ConnectedClientsIds)
-                        m_NetworkManager.SpawnManager.GetPlayerNetworkObject(uid).GetComponent<HelloWorldPlayer>().Move();
+                        m_NetworkManager.SpawnManager.GetPlayerNetworkObject(uid).GetComponent<PlayerMovementController>().Move();
                 }
+                //If the instance is not a dedicated server (meaning it’s either a client or a host), the code in the else block executes.
                 else
                 {
                     var playerObject = m_NetworkManager.SpawnManager.GetLocalPlayerObject();
-                    var player = playerObject.GetComponent<HelloWorldPlayer>();
+                    var player = playerObject.GetComponent<PlayerMovementController>();
                     player.Move();
                 }
             }
         }
     }
-}

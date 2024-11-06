@@ -15,23 +15,21 @@ public class PlayerMovementController : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        /*if (IsOwner)
-        {
-            Move();
-        }*/
+        
     }
     
     
     
-    private void Update()
+    /*private void Update()
     {
         if (!IsOwner) return;
         MovementHandle();
         transform.position = Position.Value;
-    }
+    }*/
 
-    private void MovementHandle()
+    public void MovementHandle()
     {
+        if (!IsOwner) return;
         _horiInput = Input.GetAxis("Horizontal");
         _vertInput = Input.GetAxis("Vertical");
         _direction = new Vector2(_horiInput, _vertInput).normalized;
@@ -50,4 +48,30 @@ public class PlayerMovementController : NetworkBehaviour
         Position.Value = (Vector2)transform.position + _direction * (_speed * Time.deltaTime);
     }
     
+    
+    //--MOVE STEP BY STEP
+    public void Move()
+    {
+        SubmitPositionRequestRpc();
+    }
+    
+    [Rpc(SendTo.Server)]
+    void SubmitPositionRequestRpc(RpcParams rpcParams = default)
+    {
+        Debug.Log($"Server Received the movement request on NetworkObject #{NetworkObjectId}");
+        var randomPosition = GetRandomPositionOnPlane();
+        transform.position = randomPosition;
+        Position.Value = randomPosition;
+    }
+    
+    static Vector3 GetRandomPositionOnPlane()
+    {
+        Vector2 res = Random.insideUnitCircle * 4.6f;
+        return res;
+    }
+    
+    void Update()
+    {
+        transform.position = Position.Value;
+    }
 }
