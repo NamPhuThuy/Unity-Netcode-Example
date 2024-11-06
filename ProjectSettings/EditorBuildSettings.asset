@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Netcode Example/Scenes/StartScene.unity
+    path: Assets/_Netcode Example/Scenes/MovingObject_Host-Client.unity
+    guid: 37955deb121aa5940a04a1debd9248c7
+  - enabled: 1
+    path: Assets/_Netcode Example/Scenes/Simple_Host-Client.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects: {}
