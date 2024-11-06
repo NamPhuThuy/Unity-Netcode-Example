@@ -54,7 +54,7 @@ public class NetworkManagerGUI : MonoBehaviour
 
         private void Update()
         {
-            if (m_NetworkManager.IsServer)
+            /*if (m_NetworkManager.IsServer)
             {
                 foreach (ulong uid in m_NetworkManager.ConnectedClientsIds)
                     m_NetworkManager.SpawnManager.GetPlayerNetworkObject(uid).GetComponent<PlayerMovementController>().MovementHandle();
@@ -65,7 +65,7 @@ public class NetworkManagerGUI : MonoBehaviour
                 var playerObject = m_NetworkManager.SpawnManager.GetLocalPlayerObject();
                 var player = playerObject.GetComponent<PlayerMovementController>();
                 player.MovementHandle();
-            }
+            }*/
         }
 
         static void SubmitNewPosition()
