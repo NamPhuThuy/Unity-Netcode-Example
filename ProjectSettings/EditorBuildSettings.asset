@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Netcode Example/Scenes/2_MovingObject.unity
-    guid: 37955deb121aa5940a04a1debd9248c7
+    path: Assets/_Netcode Example/0_General/0_MainMenu.unity
+    guid: b3b2c671a8d562949844005a3a4c5c6f
   - enabled: 1
-    path: Assets/_Netcode Example/Scenes/1_SimpleConnect.unity
+    path: Assets/_Netcode Example/1_SimpleConnect/1_SimpleConnect.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/_Netcode Example/2_MovingObject/2_MovingObject.unity
+    guid: 37955deb121aa5940a04a1debd9248c7
   m_configObjects: {}

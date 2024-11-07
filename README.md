@@ -13,4 +13,8 @@ This is a basic Example of using Netcode to perform Host-client model
 Run 2 instance: 1 Host, 1 Client
 The client will automatically connect to the host when turn on
 
-## Request-Response Host-Client
+## MovingObject
+Both client and host be able to move around with WASD and arrow keys
+host be able to make a dash, but client cannot
+
+
