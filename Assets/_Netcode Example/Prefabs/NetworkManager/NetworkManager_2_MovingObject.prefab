@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1690670841105985609, guid: f7ccce08fdef6034a82091807b87fd13, type: 3}
       propertyPath: m_Name
-      value: NetworkManager_MovingObject
+      value: NetworkManager_2_MovingObject
       objectReference: {fileID: 0}
     - target: {fileID: 6297582608413219161, guid: f7ccce08fdef6034a82091807b87fd13, type: 3}
       propertyPath: NetworkConfig.PlayerPrefab

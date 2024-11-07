@@ -11,10 +11,10 @@ public class NetworkManagerGUI : MonoBehaviour
         {
             m_NetworkManager = GetComponent<NetworkManager>();
         }
-
+        
         void OnGUI()
         {
-            GUILayout.BeginArea(new Rect(10, 10, 300, 300));
+            GUILayout.BeginArea(new Rect(10, 10, 200, 200));
             if (!m_NetworkManager.IsClient && !m_NetworkManager.IsServer)
             {
                 StartButtons();
@@ -34,14 +34,9 @@ public class NetworkManagerGUI : MonoBehaviour
             if (GUILayout.Button("Host")) m_NetworkManager.StartHost();
             if (GUILayout.Button("Client")) m_NetworkManager.StartClient();
             if (GUILayout.Button("Server")) m_NetworkManager.StartServer();
-            if (GUILayout.Button("Quit")) QuitApp();
+            if (GUILayout.Button("Quit")) Application.Quit();
         }
-
-        static void QuitApp()
-        {
-            Application.Quit();
-        }
-
+        
         static void StatusLabels()
         {
             var mode = m_NetworkManager.IsHost ?
@@ -52,45 +47,9 @@ public class NetworkManagerGUI : MonoBehaviour
             GUILayout.Label("Mode: " + mode);
         }
 
-        private void Update()
-        {
-            /*if (m_NetworkManager.IsServer)
-            {
-                foreach (ulong uid in m_NetworkManager.ConnectedClientsIds)
-                    m_NetworkManager.SpawnManager.GetPlayerNetworkObject(uid).GetComponent<PlayerMovementController>().MovementHandle();
-            }
-            else
-            {
-                Debug.Log("check for clients");
-                var playerObject = m_NetworkManager.SpawnManager.GetLocalPlayerObject();
-                var player = playerObject.GetComponent<PlayerMovementController>();
-                player.MovementHandle();
-            }*/
-        }
-
         static void SubmitNewPosition()
         {
-            /*if (m_NetworkManager.IsServer)
-                if (GUILayout.Button("Move"))
-            {
-                //Check if this instance is a host (a client and a server) or not
-                if (m_NetworkManager.IsClient) return;
-                
-                foreach (ulong uid in m_NetworkManager.ConnectedClientsIds)
-                    m_NetworkManager.SpawnManager.GetPlayerNetworkObject(uid).GetComponent<PlayerMovementController>().Move();
-            }
-            else if (m_NetworkManager.IsClient)
-            {
-                if (GUILayout.Button("Request Position Change"))
-                {
-                    var playerObject = m_NetworkManager.SpawnManager.GetLocalPlayerObject();
-                    var player = playerObject.GetComponent<PlayerMovementController>();
-                    player.Move();
-                }
-            }*/
-            
-            
-            if (GUILayout.Button(m_NetworkManager.IsServer ? "Move" : "Request Position Change"))
+            if (GUILayout.Button(m_NetworkManager.IsServer ? "Host Dash" : "Client Request Dash"))
             {
                 //This condition checks if the instance is a dedicated server (i.e., it’s only the server, without any client functions). Ensures this is a server-only instance and not a host
                 if (m_NetworkManager.IsServer && !m_NetworkManager.IsClient )
@@ -110,6 +69,11 @@ public class NetworkManagerGUI : MonoBehaviour
                     var player = playerObject.GetComponent<PlayerMovementController>();
                     player.Move();
                 }
+            }
+
+            if (GUILayout.Button("Quit"))
+            {
+                Application.Quit();
             }
         }
     }

@@ -5,49 +5,59 @@ using UnityEngine;
 
 public class PlayerMovementController : NetworkBehaviour
 {
-    public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
-
-    private float _horiInput, _vertInput;
+    [SerializeField] private float _horiInput, _vertInput;
     private Vector2 _direction;
     private float _speed = 5f;
-
-    private int _faceDirection;
-
-    public override void OnNetworkSpawn()
+    
+    // NetworkVariable to sync the player's position across the network
+    // private NetworkVariable<Vector2> networkedPosition = new NetworkVariable<Vector2>(Vector2.zero, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+   
+    private void Start()
     {
-        
+        // Only the owner should control the movement
+        if (!IsOwner) return;
+
+        // Register to handle changes in position
+        // networkedPosition.OnValueChanged += OnPositionChanged;
+    }
+
+    // This method is called when the networked position changes (syncs position for other clients)
+    private void OnPositionChanged(Vector2 previousValue, Vector2 newValue)
+    {
+        if (!IsOwner)
+        {
+            // Only non-owners should update their position (sync other clients to the server position)
+            transform.position = newValue;
+        }
     }
     
-    
-    
-    /*private void Update()
+    void Update()
     {
         if (!IsOwner) return;
+        //Move with 4 keys
         MovementHandle();
-        transform.position = Position.Value;
-    }*/
+        
+    }
 
     public void MovementHandle()
     {
-        if (!IsOwner) return;
         _horiInput = Input.GetAxis("Horizontal");
         _vertInput = Input.GetAxis("Vertical");
         _direction = new Vector2(_horiInput, _vertInput).normalized;
-
-        if (Mathf.Abs(_horiInput) > Mathf.Epsilon
-            || Mathf.Abs(_vertInput) > Mathf.Epsilon)
-        {
-            SendMovementInforRpc();
-        }
+        
+        transform.Translate((_speed * Time.deltaTime) * _direction);
+        
+        // Vector2 newPosi = (Vector2)transform.position + _direction * (_speed * Time.deltaTime);
+        // SendMovementInforRpc(newPosi);
     }
 
+    // This method runs on the server to update the position based on the client request
     [Rpc(SendTo.Server)]
-    private void SendMovementInforRpc(RpcParams rpcParams = default)
+    private void SendMovementInforRpc(Vector2 newPosi, RpcParams rpcParams = default)
     {
         Debug.Log($"Server Received the movement request on NetworkObject #{NetworkObjectId}");
-        Position.Value = (Vector2)transform.position + _direction * (_speed * Time.deltaTime);
+        // networkedPosition.Value = newPosi;
     }
-    
     
     //--MOVE STEP BY STEP
     public void Move()
@@ -59,19 +69,16 @@ public class PlayerMovementController : NetworkBehaviour
     void SubmitPositionRequestRpc(RpcParams rpcParams = default)
     {
         Debug.Log($"Server Received the movement request on NetworkObject #{NetworkObjectId}");
-        var randomPosition = GetRandomPositionOnPlane();
+        var randomPosition = Random.insideUnitCircle * 4.6f;
         transform.position = randomPosition;
-        Position.Value = randomPosition;
+        // networkedPosition.Value = randomPosition;
     }
     
-    static Vector3 GetRandomPositionOnPlane()
+    private void OnDestroy()
     {
-        Vector2 res = Random.insideUnitCircle * 4.6f;
-        return res;
-    }
-    
-    void Update()
-    {
-        transform.position = Position.Value;
+        if (IsOwner)
+        {
+            // networkedPosition.OnValueChanged -= OnPositionChanged;
+        }
     }
 }
