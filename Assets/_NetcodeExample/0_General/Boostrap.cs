@@ -16,10 +16,15 @@ public class Boostrap : MonoBehaviour
         if (UnityServices.State == ServicesInitializationState.Initialized)
         {
             Debug.Log("Initial successfully");
+            AuthenticationService.Instance.SignedIn += OnSignedIn;
+            
             
             //Can be sign in with Facebook, Apple, Google, Oculus, Steam,.. or Anonymous             
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
+            
+            
+            
             if (AuthenticationService.Instance.IsSignedIn)
             {
                 string username = PlayerPrefs.GetString("Username", "Player");
@@ -32,6 +37,12 @@ public class Boostrap : MonoBehaviour
                 SceneManager.LoadSceneAsync("MainMenu");
             }
         }
+    }
+
+    private void OnSignedIn()
+    {
+        Debug.Log($"Signed in, token: {AuthenticationService.Instance.AccessToken}");
+        Debug.Log($"Signed in, player id: {AuthenticationService.Instance.PlayerId}");
     }
 
     // Update is called once per frame
