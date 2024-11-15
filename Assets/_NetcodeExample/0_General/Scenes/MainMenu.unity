@@ -222,7 +222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6683677984443380726, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_Name
-      value: Button (1)
+      value: MovingObjectButton
       objectReference: {fileID: 0}
     - target: {fileID: 7036188968257397982, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -250,7 +250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7036188968257397982, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7036188968257397982, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -371,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6683677984443380726, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_Name
-      value: Button (2)
+      value: LobbyButton
       objectReference: {fileID: 0}
     - target: {fileID: 7036188968257397982, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -399,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7036188968257397982, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7036188968257397982, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1038,7 +1038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6683677984443380726, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_Name
-      value: Button
+      value: SimpleConnectButton
       objectReference: {fileID: 0}
     - target: {fileID: 7036188968257397982, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1066,7 +1066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7036188968257397982, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7036188968257397982, guid: 910a63297fbfdf540ba5b1a9ede18fb8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

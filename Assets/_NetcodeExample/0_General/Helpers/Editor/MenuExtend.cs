@@ -7,19 +7,19 @@ using UnityEngine;
 public class MenuExtend : MonoBehaviour
 {
     const string SWITCH_SCENCE_MENU_NAME = "Tools/Switch Scene";
-    private const string PATH_TO_SCENES_FOLDER = "Assets/_NetcodeExample";
+    private const string PATH_TO_SCENES_FOLDER = "Assets/_NetcodeExample//";
 
     private const string ALT = "&";
     private const string SHIFT = "#";
     private const string CTRL = "%";
     
 #if UNITY_EDITOR
-    [MenuItem(SWITCH_SCENCE_MENU_NAME + "/Boostrap" + ALT + "1")]
+    [MenuItem(SWITCH_SCENCE_MENU_NAME + "/Boostrap/" + ALT + "1")]
     // [MenuItem(SWITCH_SCENCE_MENU_NAME + "/Intro &1")]
     
     static void Boots()
     {
-        LoadSceneByName("/0_General/Scenes/Boostrap");
+        LoadSceneByName("0_General/Scenes/Boostrap");
     }
 
 
