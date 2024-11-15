@@ -19,6 +19,11 @@ host be able to make a dash, but client cannot
 
 ## 3. Lobby
 - Requirements packages: 
-  - Authentication
+  - Authentication, Lobby
+
+![](images/multiplayer_1.png)
+![](images/multiplayer_2.png)
+![](images/multiplayer_3.png)
+![](images/multiplayer_4.png)
 
 
